@@ -30,17 +30,17 @@ public class Army {
         return soldiers.get(0);
     }
 
-    public Army engageInWarWith(Army opponent) {
-        Soldier frontman1 = this.getFrontMan();
-        Soldier frontman2 = opponent.getFrontMan();
+    public Army engageInWarWith(Army opposingArmy) {
+        Soldier frontman = this.getFrontMan();
+        Soldier opposingFrontman = opposingArmy.getFrontMan();
 
-            Soldier winner = frontman1.fight(frontman2);
-            if(winner == frontman1) {
-                opponent.reportAndRemoveDeadSoldiersFromArmy();
+            Soldier winner = frontman.fight(opposingFrontman);
+            if(winner == frontman) {
+                opposingArmy.reportAndRemoveDeadSoldiersFromArmy();
                 return this;
             } else {
                 this.reportAndRemoveDeadSoldiersFromArmy();
-                return opponent;
+                return opposingArmy;
             }
     }
 
