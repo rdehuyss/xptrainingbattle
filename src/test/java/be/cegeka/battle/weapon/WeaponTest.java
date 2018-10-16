@@ -1,3 +1,5 @@
+package be.cegeka.battle.weapon;
+
 import be.cegeka.battle.weapon.Axe;
 import be.cegeka.battle.weapon.BareFist;
 import be.cegeka.battle.weapon.Spear;
