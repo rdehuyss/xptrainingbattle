@@ -23,7 +23,12 @@ public class Soldier {
     }
 
     public Soldier fight(Soldier opponent) {
-        return null;
+        if(weapon.getDamage() > opponent.weapon.getDamage()) {
+            return this;
+        } else if(weapon.getDamage() < opponent.weapon.getDamage()) {
+            return opponent;
+        }
+        return this;
     }
 
     public Weapon getWeapon() {
