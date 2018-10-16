@@ -6,9 +6,16 @@ import java.util.List;
 
 public class Army {
 
+    private IHeadquarters hq;
+
+    public Army(IHeadquarters hq) {
+        this.hq = hq;
+    }
+
     private List<Soldier> soldiers = new ArrayList<>();
 
     public void enroll(Soldier soldier) {
+        hq.reportEnlistment(soldier.getName());
         soldiers.add(soldier);
     }
 
