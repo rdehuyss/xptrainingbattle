@@ -2,7 +2,6 @@ import be.cegeka.battle.Soldier;
 import be.cegeka.battle.weapon.Axe;
 import be.cegeka.battle.weapon.BareFist;
 import be.cegeka.battle.weapon.Sword;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,5 +34,11 @@ public class SoldierTest {
 
         Soldier winner = soldier1.fight(soldier2);
         assertThat(winner).isEqualTo(soldier1);
+    }
+
+    @Test
+    public void soldierHasName() {
+        Soldier alice = new Soldier("alice");
+        assertThat(alice.getName()).isNotNull();
     }
 }
