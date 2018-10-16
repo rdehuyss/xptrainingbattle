@@ -45,7 +45,7 @@ public class ArmyTest {
     @Test
     public void givenArmyWithNoSoldiers_thenFrontManIsNull() {
         // given
-        Army army = new Army();
+        Army army = new Army(hq);
 
         // then
         assertThat(army.getFrontMan()).isNull();
@@ -55,11 +55,11 @@ public class ArmyTest {
     public void givenTwoArmiesWithOneSoldier_WhoEngageInWar_StrongestOneWins() {
         // given
         Soldier strongestSoldier = new Soldier("", new Axe());
-        Army strongestArmy = new Army();
+        Army strongestArmy = new Army(hq);
         strongestArmy.enroll(strongestSoldier);
 
         Soldier weakestSoldier = new Soldier("", new BareFist());
-        Army weakestArmy = new Army();
+        Army weakestArmy = new Army(hq);
         weakestArmy.enroll(weakestSoldier);
 
         //when
