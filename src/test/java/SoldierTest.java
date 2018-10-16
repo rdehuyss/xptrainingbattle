@@ -14,4 +14,10 @@ public class SoldierTest {
 
         assertThat(soldier.getWeapon()).isInstanceOf(BareFist.class);
     }
+
+    @Test
+    public void soldierHasName() {
+        Soldier alice = new Soldier("alice");
+        assertThat(alice.getName()).isNotNull();
+    }
 }
