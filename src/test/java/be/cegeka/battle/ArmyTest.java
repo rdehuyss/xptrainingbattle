@@ -1,15 +1,22 @@
 package be.cegeka.battle;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class ArmyTest {
+
+    @Mock
+    IHeadquarters hq;
 
     @Test
     public void canEnrollSoldierInArmy() {
         Soldier alice = new Soldier("alice");
-        Army army = new Army();
+        Army army = new Army(hq);
 
         army.enroll(alice);
 
@@ -22,7 +29,7 @@ public class ArmyTest {
         Soldier alice = new Soldier("Alice");
         Soldier bob = new Soldier("Bob");
         Soldier cath = new Soldier("Cath");
-        Army army = new Army();
+        Army army = new Army(hq);
 
         // when
         army.enroll(alice);
