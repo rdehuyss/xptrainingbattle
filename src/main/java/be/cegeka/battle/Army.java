@@ -42,8 +42,6 @@ public class Army {
                 this.reportAndRemoveDeadSoldiersFromArmy();
                 return opponent;
             }
-
-
     }
 
     private void reportAndRemoveDeadSoldiersFromArmy() {

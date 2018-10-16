@@ -34,6 +34,7 @@ public class Soldier {
             this.die();
             return opponent;
         }
+        opponent.die();
         return this;
     }
 

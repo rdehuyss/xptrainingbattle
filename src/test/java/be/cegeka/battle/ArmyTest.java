@@ -1,12 +1,13 @@
 package be.cegeka.battle;
 
-import be.cegeka.battle.weapon.Axe;
-import be.cegeka.battle.weapon.BareFist;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static be.cegeka.battle.ArmyTestBuilder.*;
+import static be.cegeka.battle.SoldierTestBuilder.aSoldierWithAnAxe;
+import static be.cegeka.battle.SoldierTestBuilder.aSoldierWithBareFists;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -54,22 +55,20 @@ public class ArmyTest {
     @Test
     public void givenTwoArmiesWithOneSoldier_WhoEngageInWar_StrongestOneWins() {
         // given
-        Soldier strongestSoldier = new Soldier("", new Axe());
-        Army strongestArmy = new Army(hq);
-        strongestArmy.enroll(strongestSoldier);
+        Army strongestArmy = aDefaultArmy()
+                .withSoldiers(aSoldierWithAnAxe())
+                .build();
 
-        Soldier weakestSoldier = new Soldier("", new BareFist());
-        Army weakestArmy = new Army(hq);
-        weakestArmy.enroll(weakestSoldier);
+        Army weakestArmy = aDefaultArmy()
+                .withSoldiers(aSoldierWithBareFists())
+                .build();
 
         //when
         Army winningArmy = strongestArmy.engageInWarWith(weakestArmy);
 
         // then
         assertThat(winningArmy).isEqualTo(strongestArmy);
-        assertThat(winningArmy.getSoldiers()).containsOnly(strongestSoldier);
-        assertThat(strongestSoldier.isDead()).isFalse();
+        assertThat(winningArmy.getSoldiers()).hasSize(1);
         assertThat(weakestArmy.getSoldiers()).isEmpty();
-        assertThat(weakestSoldier.isDead()).isTrue();
     }
 }
