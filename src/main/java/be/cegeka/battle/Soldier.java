@@ -9,6 +9,8 @@ public class Soldier {
     private final String name;
     private Weapon weapon;
     private int id;
+    private boolean isDead;
+
 
     public Soldier(String name) {
         this(name, new BareFist());
@@ -16,6 +18,7 @@ public class Soldier {
 
     public Soldier(String name, Weapon weapon) {
         this.name = name;
+        this.isDead = false;
         this.weapon = weapon;
     }
 
@@ -25,11 +28,17 @@ public class Soldier {
 
     public Soldier fight(Soldier opponent) {
         if(weapon.getDamage() > opponent.weapon.getDamage()) {
+            opponent.die();
             return this;
         } else if(weapon.getDamage() < opponent.weapon.getDamage()) {
+            this.die();
             return opponent;
         }
         return this;
+    }
+
+    private void die() {
+        this.isDead = true;
     }
 
     public Weapon getWeapon() {
@@ -42,5 +51,13 @@ public class Soldier {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public boolean isAlive() {
+        return !isDead();
     }
 }
