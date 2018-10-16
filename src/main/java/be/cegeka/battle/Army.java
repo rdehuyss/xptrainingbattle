@@ -36,10 +36,12 @@ public class Army {
 
         if(frontman == null)
         {
+            opposingArmy.getHeadquarters().reportVictory(opposingArmy.getNumberOfAliveSoldiers());
             return opposingArmy;
         }
         else if (opposingFrontman == null)
         {
+            this.getHeadquarters().reportVictory(this.getNumberOfAliveSoldiers());
             return this;
         }
         else {
@@ -49,6 +51,10 @@ public class Army {
 
             return engageInWarWith(opposingArmy);
         }
+    }
+
+    public IHeadquarters getHeadquarters() {
+        return hq;
     }
 
     private void reportAndRemoveDeadSoldiersFromArmy() {
@@ -61,6 +67,12 @@ public class Army {
                 .filter(Soldier::isDead)
                 .mapToInt(Soldier::getId)
                 .forEach(hq::reportCasualty);
+    }
+
+    public int getNumberOfAliveSoldiers() {
+        return (int) soldiers.stream()
+                .filter(Soldier::isAlive)
+                .count();
     }
 }
 

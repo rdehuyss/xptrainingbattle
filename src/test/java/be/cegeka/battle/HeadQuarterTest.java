@@ -5,6 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import static be.cegeka.battle.ArmyTestBuilder.aDefaultArmy;
+import static be.cegeka.battle.SoldierTestBuilder.aSoldierWithAnAxe;
+import static be.cegeka.battle.SoldierTestBuilder.aSoldierWithBareFists;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -53,9 +57,20 @@ public class HeadQuarterTest {
 
     @Test
     public void givenArmyHasWon_victoryIsReported() {
-        Soldier alice = new Soldier("Alice");
-        Soldier bob = new Soldier("bob");
-        Army winningArmy = new Army(hq);
-        Army losingArmy = new Army(hq);
+        // given
+        Army strongestArmy = aDefaultArmy()
+                .withHQ(hq)
+                .withSoldiers(aSoldierWithAnAxe(), aSoldierWithBareFists())
+                .build();
+
+        Army weakestArmy = aDefaultArmy()
+                .withSoldiers(aSoldierWithBareFists())
+                .build();
+
+        //when
+        strongestArmy.engageInWarWith(weakestArmy);
+
+        // then
+        verify(hq).reportVictory(2);
     }
 }

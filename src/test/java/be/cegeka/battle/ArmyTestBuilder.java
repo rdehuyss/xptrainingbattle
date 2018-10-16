@@ -10,6 +10,8 @@ public class ArmyTestBuilder {
 
     private List<Soldier> soldiers;
 
+    private IHeadquarters hq;
+
     private ArmyTestBuilder() {
 
     }
@@ -28,12 +30,27 @@ public class ArmyTestBuilder {
         return this;
     }
 
+    public ArmyTestBuilder withHQ(IHeadquarters hq) {
+        this.hq = hq;
+        return this;
+    }
+
     public Army build() {
-        Army army = new Army(Mockito.mock(IHeadquarters.class));
+        Army army = createArmy();
         for (Soldier s: soldiers) {
             army.enroll(s);
         }
         return army;
 
+    }
+
+    private Army createArmy() {
+        Army army;
+        if (hq == null) {
+            army = new Army(Mockito.mock(IHeadquarters.class));
+        } else {
+            army = new Army(hq);
+        }
+        return army;
     }
 }
