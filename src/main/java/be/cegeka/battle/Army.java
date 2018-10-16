@@ -34,14 +34,21 @@ public class Army {
         Soldier frontman = this.getFrontMan();
         Soldier opposingFrontman = opposingArmy.getFrontMan();
 
-            Soldier winner = frontman.fight(opposingFrontman);
-            if(winner == frontman) {
-                opposingArmy.reportAndRemoveDeadSoldiersFromArmy();
-                return this;
-            } else {
-                this.reportAndRemoveDeadSoldiersFromArmy();
-                return opposingArmy;
-            }
+        if(frontman == null)
+        {
+            return opposingArmy;
+        }
+        else if (opposingFrontman == null)
+        {
+            return this;
+        }
+        else {
+            frontman.fight(opposingFrontman);
+            this.reportAndRemoveDeadSoldiersFromArmy();
+            opposingArmy.reportAndRemoveDeadSoldiersFromArmy();
+
+            return engageInWarWith(opposingArmy);
+        }
     }
 
     private void reportAndRemoveDeadSoldiersFromArmy() {

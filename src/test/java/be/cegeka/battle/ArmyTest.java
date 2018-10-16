@@ -6,6 +6,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static be.cegeka.battle.ArmyTestBuilder.*;
+import static be.cegeka.battle.SoldierTestBuilder.*;
 import static be.cegeka.battle.SoldierTestBuilder.aSoldierWithAnAxe;
 import static be.cegeka.battle.SoldierTestBuilder.aSoldierWithBareFists;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -69,6 +70,56 @@ public class ArmyTest {
         // then
         assertThat(winningArmy).isEqualTo(strongestArmy);
         assertThat(winningArmy.getSoldiers()).hasSize(1);
+        assertThat(weakestArmy.getSoldiers()).isEmpty();
+    }
+
+    @Test
+    public void givenTwoArmiesWithUnevenAmoutOfSoldiers_WhoEngageInWar_StrongestArmyWins() {
+        // given
+        Army strongestArmy = aDefaultArmy()
+                .withSoldiers(
+                        aSoldierWithASword(),
+                        aSoldierWithAnAxe()
+                        )
+                .build();
+
+        Army weakestArmy = aDefaultArmy()
+                .withSoldiers(
+                        aSoldierWithAnAxe(),
+                        aSoldierWithBareFists())
+                .build();
+
+        //when
+        Army winningArmy = strongestArmy.engageInWarWith(weakestArmy);
+
+        // then
+        assertThat(winningArmy).isEqualTo(strongestArmy);
+        assertThat(winningArmy.getSoldiers()).hasSize(1);
+        assertThat(weakestArmy.getSoldiers()).isEmpty();
+    }
+
+    @Test
+    public void givenTwoArmiesWithUnevenAmoutOfSoldiers_WhoEngageInWar_ObviouslyStrongestArmyWins() {
+        // given
+        Army strongestArmy = aDefaultArmy()
+                .withSoldiers(
+                        aSoldierWithAnAxe(),
+                        aSoldierWithAnAxe()
+                        )
+                .build();
+
+        Army weakestArmy = aDefaultArmy()
+                .withSoldiers(
+                        aSoldierWithASword(),
+                        aSoldierWithBareFists())
+                .build();
+
+        //when
+        Army winningArmy = strongestArmy.engageInWarWith(weakestArmy);
+
+        // then
+        assertThat(winningArmy).isEqualTo(strongestArmy);
+        assertThat(winningArmy.getSoldiers()).hasSize(2);
         assertThat(weakestArmy.getSoldiers()).isEmpty();
     }
 }
