@@ -10,7 +10,7 @@ public class SoldierTest {
     @Test
     public void SolderHasBareFistWeaponByDefault()
     {
-        Soldier soldier = new Soldier();
+        Soldier soldier = new Soldier("name");
 
         assertThat(soldier.getWeapon()).isInstanceOf(BareFist.class);
     }
