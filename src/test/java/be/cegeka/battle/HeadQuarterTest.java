@@ -36,4 +36,20 @@ public class HeadQuarterTest {
 
         verify(soldier).setId(5);
     }
+
+    @Test
+    public void givenSoldierDies_thenReportedToHQ() {
+        Soldier alice = new Soldier("Alice");
+        Army army = new Army(hq);
+
+        army.enroll(alice);
+
+        alice.die();
+
+        army.reportDeath();
+
+        verify(hq).reportCasualty(alice.getId());
+    }
+
+    
 }

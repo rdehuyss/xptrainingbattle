@@ -37,7 +37,7 @@ public class Soldier {
         return this;
     }
 
-    private void die() {
+    public void die() {
         this.isDead = true;
     }
 
@@ -52,7 +52,7 @@ public class Soldier {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public boolean isDead() {
         return isDead;
     }

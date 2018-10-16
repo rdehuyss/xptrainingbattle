@@ -36,18 +36,26 @@ public class Army {
 
             Soldier winner = frontman1.fight(frontman2);
             if(winner == frontman1) {
-                opponent.removeAndBurnDeadSoldiersFromArmy();
+                opponent.reportAndRemoveDeadSoldiersFromArmy();
                 return this;
             } else {
-                this.removeAndBurnDeadSoldiersFromArmy();
+                this.reportAndRemoveDeadSoldiersFromArmy();
                 return opponent;
             }
 
 
     }
 
-    private void removeAndBurnDeadSoldiersFromArmy() {
-        this.soldiers.removeIf(x -> x.isDead());
+    private void reportAndRemoveDeadSoldiersFromArmy() {
+        reportDeath();
+        soldiers.removeIf(Soldier::isDead);
+    }
+
+    public void reportDeath() {
+        soldiers.stream()
+                .filter(Soldier::isDead)
+                .mapToInt(Soldier::getId)
+                .forEach(hq::reportCasualty);
     }
 }
 
