@@ -8,6 +8,7 @@ public class Soldier {
 
     private final String name;
     private Weapon weapon;
+    private int id;
 
     public Soldier(String name) {
         this(name, new BareFist());
@@ -33,5 +34,13 @@ public class Soldier {
 
     public Weapon getWeapon() {
         return weapon;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -15,7 +15,7 @@ public class Army {
     private List<Soldier> soldiers = new ArrayList<>();
 
     public void enroll(Soldier soldier) {
-        hq.reportEnlistment(soldier.getName());
+        soldier.setId(hq.reportEnlistment(soldier.getName()));
         soldiers.add(soldier);
     }
 
