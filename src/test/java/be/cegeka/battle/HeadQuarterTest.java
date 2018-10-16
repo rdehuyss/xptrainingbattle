@@ -51,5 +51,11 @@ public class HeadQuarterTest {
         verify(hq).reportCasualty(alice.getId());
     }
 
-    
+    @Test
+    public void givenArmyHasWon_victoryIsReported() {
+        Soldier alice = new Soldier("Alice");
+        Soldier bob = new Soldier("bob");
+        Army winningArmy = new Army(hq);
+        Army losingArmy = new Army(hq);
+    }
 }
